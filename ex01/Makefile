@@ -5,28 +5,36 @@
 #                                                     +:+ +:+         +:+      #
 #    By: luiza <luiza@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2026/06/25 18:20:14 by lukorman          #+#    #+#              #
-#    Updated: 2026/07/09 18:31:27 by luiza            ###   ########.fr        #
+#    Created: 2026/06/30 16:29:48 by luiza             #+#    #+#              #
+#    Updated: 2026/07/07 17:40:18 by luiza            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 # **************************************************************************** #
 #                               configuration                                  #
 # **************************************************************************** #
 
 CC		= c++
-CFLAGS	= -Wall -Wextra -Werror -std=c++98
+CFLAGS	= -Wall -Wextra -Werror -I$(INC_DIR) -std=c++98
 RM		= rm -rf
 
+# **************************************************************************** #
+#                                directories                                   #
+# **************************************************************************** #
+
+SRC_DIR	= src/
+OBJ_DIR	= obj/
+INC_DIR	= include
 
 # **************************************************************************** #
 #                                   files                                      #
 # **************************************************************************** #
 
-NAME	= megaphone
-SRC		= megaphone.cpp
-OBJ_DIR	= obj/
-OBJ		= $(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))
+NAME	= phonebook
+SRC		= $(shell find $(SRC_DIR) -name '*.cpp')
+OBJ		= $(patsubst $(SRC_DIR)%, $(OBJ_DIR)%, $(SRC:.cpp=.o))
+HEADERS	= $(shell find $(INC_DIR) -name '*.hpp')
 
 # **************************************************************************** #
 #                              compile commands                                #
@@ -42,7 +50,7 @@ COMP_OBJ	= $(CC) $(CFLAGS) -c $< -o $@
 all: $(NAME)
 	@echo "compilation completed."
 
-$(OBJ): $(SRC)
+$(OBJ_DIR)%.o: $(SRC_DIR)%.cpp $(HEADERS)
 	@mkdir -p $(dir $@)
 	@$(COMP_OBJ)
 
