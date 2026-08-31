@@ -66,6 +66,11 @@ void	PhoneBook::promptSearch(void)
 {
 	std::string	indexStr;
 
+	if (length == 0)
+	{
+		std::cout << "Phonebook is empty." << std::endl;
+		return ;
+	}
 	printTable();
 	indexStr = promptInput("Index: ");
 	if (!isValidNumber(indexStr))
