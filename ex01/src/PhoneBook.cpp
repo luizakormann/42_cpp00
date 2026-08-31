@@ -35,10 +35,10 @@ std::string	PhoneBook::promptInput(const std::string &prompt, bool digitsOnly)
 void	PhoneBook::promptAdd(void)
 {
 	Contact		contact;
-	std::string	phoneNumber;
-	std::string	nickname;
 	std::string	firstName;
 	std::string	lastName;
+	std::string	nickname;
+	std::string	phoneNumber;
 	std::string	secret;
 
 	firstName = promptInput("First Name: ");
@@ -47,7 +47,7 @@ void	PhoneBook::promptAdd(void)
 	phoneNumber = promptInput("Number: ", true);
 	secret = promptInput("Secret: ");
 
-	contact.setContact(phoneNumber, nickname, secret, firstName, lastName);
+	contact.setContact(firstName, lastName, nickname, phoneNumber, secret);
 	save(contact);
 }
 
