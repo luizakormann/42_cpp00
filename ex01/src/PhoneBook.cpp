@@ -18,7 +18,7 @@ std::string	PhoneBook::promptInput(const std::string &prompt, bool digitsOnly)
 			std::cout << " Exiting..." << std::endl;
 			std::exit(0);
 		}
-		if (input.empty() || isWhitespaces(input))
+		if (isBlank(input))
 		{
 			std::cout << "No empty inputs!" << std::endl;
 			continue ;
@@ -35,19 +35,19 @@ std::string	PhoneBook::promptInput(const std::string &prompt, bool digitsOnly)
 void	PhoneBook::promptAdd(void)
 {
 	Contact		contact;
-	std::string	phoneNumber;
-	std::string	nickname;
 	std::string	firstName;
 	std::string	lastName;
+	std::string	nickname;
+	std::string	phoneNumber;
 	std::string	secret;
 
-	phoneNumber = promptInput("Number: ", true);
-	nickname = promptInput("Nickname: ");
 	firstName = promptInput("First Name: ");
 	lastName = promptInput("Last Name: ");
+	nickname = promptInput("Nickname: ");
+	phoneNumber = promptInput("Number: ", true);
 	secret = promptInput("Secret: ");
 
-	contact.setContact(phoneNumber, nickname, secret, firstName, lastName);
+	contact.setContact(firstName, lastName, nickname, phoneNumber, secret);
 	save(contact);
 }
 
@@ -66,6 +66,11 @@ void	PhoneBook::promptSearch(void)
 {
 	std::string	indexStr;
 
+	if (length == 0)
+	{
+		std::cout << "Phonebook is empty." << std::endl;
+		return ;
+	}
 	printTable();
 	indexStr = promptInput("Index: ");
 	if (!isValidNumber(indexStr))
@@ -89,7 +94,7 @@ void	PhoneBook::printTable() const
 		std::cout << std::setw(10) << i << "|"
 			<< std::setw(10) << truncateField(list[i].getFirstName()) << "|"
 			<< std::setw(10) << truncateField(list[i].getLastName()) << "|"
-			<< std::setw(10) << truncateField(list[i].getNickname()) << "|"
+			<< std::setw(10) << truncateField(list[i].getNickname())
 			<< std::endl;
 	}
 }
@@ -113,7 +118,7 @@ bool	PhoneBook::isValidNumber(const std::string &str)
 	return (true);
 }
 
-bool	PhoneBook::isWhitespaces(const std::string &str)
+bool	PhoneBook::isBlank(const std::string &str)
 {
 	for (std::string::size_type i = 0; i < str.size(); i++)
 	{
