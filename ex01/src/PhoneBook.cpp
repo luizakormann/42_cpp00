@@ -18,7 +18,7 @@ std::string	PhoneBook::promptInput(const std::string &prompt, bool digitsOnly)
 			std::cout << " Exiting..." << std::endl;
 			std::exit(0);
 		}
-		if (input.empty() || isWhitespaces(input))
+		if (isWhitespaces(input))
 		{
 			std::cout << "No empty inputs!" << std::endl;
 			continue ;
@@ -41,10 +41,10 @@ void	PhoneBook::promptAdd(void)
 	std::string	lastName;
 	std::string	secret;
 
-	phoneNumber = promptInput("Number: ", true);
-	nickname = promptInput("Nickname: ");
 	firstName = promptInput("First Name: ");
 	lastName = promptInput("Last Name: ");
+	nickname = promptInput("Nickname: ");
+	phoneNumber = promptInput("Number: ", true);
 	secret = promptInput("Secret: ");
 
 	contact.setContact(phoneNumber, nickname, secret, firstName, lastName);
