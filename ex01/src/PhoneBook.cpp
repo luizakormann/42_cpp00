@@ -89,7 +89,7 @@ void	PhoneBook::printTable() const
 		std::cout << std::setw(10) << i << "|"
 			<< std::setw(10) << truncateField(list[i].getFirstName()) << "|"
 			<< std::setw(10) << truncateField(list[i].getLastName()) << "|"
-			<< std::setw(10) << truncateField(list[i].getNickname()) << "|"
+			<< std::setw(10) << truncateField(list[i].getNickname())
 			<< std::endl;
 	}
 }
