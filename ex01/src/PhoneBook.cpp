@@ -18,7 +18,7 @@ std::string	PhoneBook::promptInput(const std::string &prompt, bool digitsOnly)
 			std::cout << " Exiting..." << std::endl;
 			std::exit(0);
 		}
-		if (isWhitespaces(input))
+		if (isBlank(input))
 		{
 			std::cout << "No empty inputs!" << std::endl;
 			continue ;
@@ -113,7 +113,7 @@ bool	PhoneBook::isValidNumber(const std::string &str)
 	return (true);
 }
 
-bool	PhoneBook::isWhitespaces(const std::string &str)
+bool	PhoneBook::isBlank(const std::string &str)
 {
 	for (std::string::size_type i = 0; i < str.size(); i++)
 	{
